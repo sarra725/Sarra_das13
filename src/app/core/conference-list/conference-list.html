@@ -1,0 +1,29 @@
+<h1>{{title}}</h1>
+<h2>{{(x())}}</h2>
+<div>
+    <input type="text" placeholder="taper le titre" [(ngModel)]="searchItem" >{{searchItem}}
+
+</div>
+<div class="container" style="display: flex;flex-wrap: wrap;gap: 20px;">
+
+    @for(conf of filteredConfList ;track conf.id) {
+        @if(conf.nbPlaces>0){
+            <section class="card" style="max-width: 320px">
+  <img src="{{conf.imageUrl}}" class="card-img-top" alt="conf image">
+  <div class="card-body">
+    <h4 class="card-title">{{conf.titre | uppercase}}</h4>
+    <p class="card-text">{{conf.description}}</p>
+    <p>{{conf.date | date:'dd-MM'}}</p>
+    <button (click)="addToFavorites(conf)">Like</button>
+  </div>
+    </section>
+    }
+}
+</div>
+<div>
+    <ul>
+        @for(fconf of favorites(); track fconf.id) {
+            <li>{{fconf.titre}}</li>
+        }
+     </ul>
+</div>
